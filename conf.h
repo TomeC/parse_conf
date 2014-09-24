@@ -10,7 +10,7 @@ class Conf
 {
 public:
 	typedef map<string, string>         MapSection;
-    typedef map<string, MapSection>     MapFile;
+    	typedef map<string, MapSection>     MapFile;
     //typedef map<string, MapFile>        MapFiles;
 public:
 	Conf ()	{ ; }
@@ -18,13 +18,13 @@ public:
 	{
 		if (path.length () == 0)
 		{
-			cout<<"需要的解析的路径长度为0"<<endl;
+			cout<<"path error"<<endl;
 			return 1;
 		}
-
-		if (fs.open (path))
+		fs.open (path);
+		if (!fs)
 		{
-			cout<<"打开文件"<<path<<"错误"<<endl;
+			cout<<"open file"<<path<<"failed"<<endl;
 			return 2;	
 		}
 
@@ -34,13 +34,13 @@ public:
 		{
 			getline (fs, inbuf);
 
-			// 分析是否为注释行, 以#为注释
+			// To analyze whether the comment line
             first = inbuf.find_first_of("#"); 
             if (first != (string::npos))
             {
                 inbuf = inbuf.substr(0, first);
             }
-			//空行或注释行
+			//Blank lines or comment line
 			if (inbuf.size () == 0)
 				continue;	
 			
@@ -54,7 +54,7 @@ public:
 					mconf.insert (MapFile::value_type (section, empty));
 				}else
 				{
-					cout<<"格式错误"<<endl;
+					cout<<"Format error"<<endl;
 					return 3;
 				}
 			}else
@@ -62,7 +62,7 @@ public:
 				first = inbuf.find('=');
 				if (first == string::npos)
 				{
-					cout<<"格式错误"<<endl;
+					cout<<""<<endl;
 					return 4;
 				}
 				string name = inbuf.substr(0, first);
@@ -74,6 +74,7 @@ public:
 			}
 
 		}
+		return 0;
 	}
 	string getString (const string &sec, const string &name) const
 	{
@@ -101,6 +102,7 @@ public:
 		}
 		return result;
 	}
+	//delete the string on the head or tail of the line
 	string& Trim(string& line, const char* trim)
 	{
 		size_t first = line.find_first_not_of(trim);
