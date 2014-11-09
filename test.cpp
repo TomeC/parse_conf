@@ -7,7 +7,7 @@ int main ()
 
 	Conf cf;
 	cf.LoadConf ("server.conf");
-	cout<<cf.getString ("CfgPath", "MysqlCfg")<<endl;
-	cout<<cf.getInt ("server", "port")<<endl;
+	cout<<cf.getString ("serverNet", "ip")<<endl;
+	cout<<cf.getInt ("serverNet", "port")<<endl;
 	return 0;
 }

@@ -1,4 +1,4 @@
-#ifndef __CONF_H__
+﻿#ifndef __CONF_H__
 #define __CONF_H__
 
 #include <fstream>
@@ -9,9 +9,8 @@ using namespace std;
 class Conf
 {
 public:
-	typedef map<string, string>         MapSection;
-    	typedef map<string, MapSection>     MapFile;
-    //typedef map<string, MapFile>        MapFiles;
+	typedef map<string, string>		 MapSection;
+		typedef map<string, MapSection>	 MapFile;
 public:
 	Conf ()	{ ; }
 	int LoadConf (const string &path)
@@ -21,10 +20,10 @@ public:
 			cout<<"path error"<<endl;
 			return 1;
 		}
-		fs.open (path);
+		fs.open (path.c_str ());
 		if (!fs)
 		{
-			cout<<"open file"<<path<<"failed"<<endl;
+			cout<<"open file "<<path<<" failed"<<endl;
 			return 2;	
 		}
 
@@ -35,11 +34,11 @@ public:
 			getline (fs, inbuf);
 
 			// To analyze whether the comment line
-            first = inbuf.find_first_of("#"); 
-            if (first != (string::npos))
-            {
-                inbuf = inbuf.substr(0, first);
-            }
+			first = inbuf.find_first_of("#"); 
+			if (first != (string::npos))
+			{
+				inbuf = inbuf.substr(0, first);
+			}
 			//Blank lines or comment line
 			if (inbuf.size () == 0)
 				continue;	
@@ -88,11 +87,13 @@ public:
 			if (msi != tmp.end ())
 				return msi->second;
 		}
-		return NULL;
+		return "";	//key is not found
 	}
 	int getInt (const string &sec, const string &name) const
 	{
 		string tmp = getString (sec, name);
+		if (tmp == "")
+			return -1;	//key is not found
 		string::iterator si = tmp.begin ();
 		int result = 0;
 		while (si != tmp.end ())
