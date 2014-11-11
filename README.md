@@ -15,9 +15,9 @@ y = yy
     y = yy
 ```
 ```
-	LoadConf(path)  //path是需要解析的文件的路径，比如 "./conf/netsver.conf"; <br />
-	getString (const string &sec, const string &name)   //返回sec下name的值，string类型 <br />
-	getInt (const string &sec, const string &name)      //返回sec下name的值，int类型  <br />
+	LoadConf(string &path)  //path是需要解析的文件的路径，比如 "./conf/netsver.conf"; <br />
+	getString (const string &sec, const string &name)   //返回section下name的值，string类型 <br />
+	getInt (const string &sec, const string &name)      //返回section下name的值，int类型  <br />
 ```
 ##About Author
 
