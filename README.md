@@ -1,8 +1,8 @@
 ﻿parse_conf
 ==========
 
-###编译：
->g++ test.cpp
+###使用：
+直接引入conf.h文件即可，方法见测试程序test.cpp
 
 ###配置文件的格式：
 ```
@@ -14,16 +14,3 @@ y = yy
 [yy] 
     y = yy
 ```
-```
-	LoadConf(string &path)  //path是需要解析的文件的路径，比如 "./conf/netsver.conf"; <br />
-	getString (const string &sec, const string &name)   //返回section下name的值，string类型 <br />
-	getInt (const string &sec, const string &name)      //返回section下name的值，int类型  <br />
-```
-##About Author
-
-```javascript
-	nickName  : "benjamin",
-	email : 'wangkun_mr@foxmail.com',
-	site : "http://www.cnblogs.com/benjaming/"
-```
-  
